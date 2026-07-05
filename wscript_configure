@@ -1,0 +1,14 @@
+from waflib import Configure, Context, Errors, Utils, Logs
+from waflib.Configure import conf
+from waflib.extras import msvs
+import glob, os
+
+ctx.load('variant-builder', tooldir='tools')
+ctx.load('toolchains', tooldir='tools')
+
+# Track all tools files for Waf's autoconfig Node hashing
+if os.path.exists('tools'):
+    for f in glob.glob('tools/**/*.py', recursive=True):
+        abspath = os.path.abspath(f)
+        ctx.files.append(abspath)
+        ctx.hash = Utils.h_list((ctx.hash, Utils.readf(abspath, 'rb')))

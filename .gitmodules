@@ -1,0 +1,3 @@
+[submodule "submodules/external/waf"]
+	path = submodules/external/waf
+	url = https://gitlab.com/ita1024/waf.git

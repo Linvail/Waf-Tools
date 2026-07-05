@@ -1,0 +1,4 @@
+from waflib import Options
+
+opt.load('variant-builder', tooldir='tools')
+opt.load('toolchains', tooldir='tools')

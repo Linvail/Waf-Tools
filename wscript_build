@@ -1,0 +1,42 @@
+
+import platform
+
+def setup_build_env(bld):
+    target_platform = bld.target_platform
+    arch = bld.target_arch
+    compiler = 'gcc'
+    host_platform = platform.system()
+    if host_platform == "Windows":
+        compiler = "msvc"
+    elif host_platform == "Linux" and target_platform == "Windows":
+        # Cross-compiling from Linux to Windows, so we use clang.
+        compiler = "clang"
+    else:
+        bld.fatal("Unsupported host platform: %s" % host_platform)
+
+    env_name = "%s-%s-%s-%s-%s" % (target_platform, arch, host_platform, compiler, bld.mode)
+    
+    if env_name not in bld.all_envs:
+        bld.fatal("Environment '%s' does not exist." % env_name)
+
+    env = bld.all_envs[env_name].derive()
+    bld.set_env(env)
+    return env
+
+
+def build_example1(bld):
+    setup_build_env(bld)
+    bld(features='cxx cxxprogram', source='src/Example1.cpp', target='Example1')
+
+def build_example2(bld):
+    setup_build_env(bld)
+    bld(features='cxx cxxprogram', source='src/Example2.cpp', target='Example2')
+
+
+
+product_table = {
+    "Example1" : build_example1,
+    "Example2" : build_example2,
+}
+
+product_table[bld.project](bld)
