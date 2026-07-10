@@ -7,7 +7,7 @@ A modern Waf-based C++ build system featuring multi-project and multi-mode build
 ## Features
 
 - **Multi-Project & Multi-Mode Configuration**: Easily build different targets (e.g., `Example1`, `Example2`) in either `debug` or `release` modes.
-- **Native Host Toolchains**: 
+- **Native Host Toolchains**:
   - Windows: MSVC toolchain supporting both `x64` and `x86` target architectures.
   - Linux: GCC and Clang configurations.
 - **Windows Cross-Compilation (Linux to Windows)**: Compile target Windows executables on a Linux host (WSL2 Ubuntu) using Clang and MinGW.

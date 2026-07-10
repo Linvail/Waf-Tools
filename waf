@@ -10,10 +10,10 @@ def main():
     cwd = os.path.dirname(os.path.abspath(__file__))
     # Path to the real waf script in the submodule
     waf_path = os.path.join(cwd, 'submodules', 'external', 'waf', 'waf')
-    
+
     # Run the real waf script with Python
     cmd = [sys.executable, waf_path] + sys.argv[1:]
-    
+
     # Run and forward exit code
     try:
         result = subprocess.run(cmd)

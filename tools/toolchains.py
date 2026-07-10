@@ -7,7 +7,7 @@ def options(opt):
 
 def configure(ctx):
     if platform.system() == "Windows":
-        ctx.load('toolchain-windows', tooldir='tools')    
+        ctx.load('toolchain-windows', tooldir='tools')
         ctx.configure_win64_msvc()
         ctx.configure_win32_msvc()
     elif platform.system() == "Linux":

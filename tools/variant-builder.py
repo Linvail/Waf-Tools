@@ -41,7 +41,7 @@ def select_target_arch(ctx):
         return 'x64'
     else:
         ctx.fatal('Unknown platform: %s' % host)
-        
+
 
 def _project(ctx):
     if hasattr(ctx, '_cached_project'):
@@ -144,7 +144,7 @@ def _target_arch(ctx):
 def options(opt):
 
     group = opt.add_option_group('Variant builder')
-    
+
     projects = get_all_projects(opt)
     modes = get_all_modes(opt)
 

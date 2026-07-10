@@ -18,17 +18,17 @@ def configure_win_msvc_common(ctx, env_name):
 
     # Modern compiler flags: Standard compliance, UTF-8 parsing, and high warnings.
     ctx.env.append_value('CXXFLAGS', [
-        '/EHsc', 
-        '/std:c++17', 
+        '/EHsc',
+        '/std:c++17',
         '/permissive-',  # Enforce standard conformance.
         '/utf-8',        # Force UTF-8 source file encoding.
         '/W4'            # Warning level 4.
     ])
     ctx.env.append_value('CFLAGS', [
-        '/utf-8', 
+        '/utf-8',
         '/W3'
     ])
-    
+
     # Target Console Subsystem.
     ctx.env.append_value('LINKFLAGS', ['/SUBSYSTEM:CONSOLE'])
 
@@ -54,17 +54,17 @@ def configure_win_msvc_common(ctx, env_name):
 
     for flag in ('CFLAGS', 'CXXFLAGS'):
         ctx.env.append_value(flag, [
-            '/MD', 
-            '/O2', 
-            '/Ob2', 
+            '/MD',
+            '/O2',
+            '/Ob2',
             '/Zi'      # Generate PDB debug symbols in Release.
         ])
         ctx.env.append_value(flag, ['/FS'])
 
     # Enable linker optimizations along with debug symbols generation.
     ctx.env.append_value('LINKFLAGS', [
-        '/DEBUG', 
-        '/OPT:REF', 
+        '/DEBUG',
+        '/OPT:REF',
         '/OPT:ICF'
     ])
 
@@ -75,7 +75,7 @@ def configure_win_msvc_common(ctx, env_name):
 def configure_win64_msvc(ctx):
     prev_variant = ctx.variant
 
-    env_name = "Windows-x64-Windows-msvc" 
+    env_name = "Windows-x64-Windows-msvc"
     ctx.setenv(env_name, ctx.env)
 
     ctx.env.MSVC_TARGETS = ['x64']
@@ -88,7 +88,7 @@ def configure_win64_msvc(ctx):
 def configure_win32_msvc(ctx):
     prev_variant = ctx.variant
 
-    env_name = "Windows-x86-Windows-msvc" 
+    env_name = "Windows-x86-Windows-msvc"
     ctx.setenv(env_name, ctx.env)
 
     # Use x64 host compiler to compile x86 target.

@@ -121,7 +121,7 @@ def configure_Windows_x64_Linux_clang(ctx):
         cpp_path = cpp_paths[0]
         target_cpp_path = '%s/x86_64-w64-mingw32' % cpp_path
         ctx.env.append_value('CXXFLAGS', ['-isystem', cpp_path, '-isystem', target_cpp_path])
-        
+
         lib_path = os.path.dirname(os.path.dirname(cpp_path))
         ctx.env.append_value('LINKFLAGS', ['-L', lib_path, '-L', '/usr/x86_64-w64-mingw32/lib'])
     else:
