@@ -1,10 +1,17 @@
-from waflib import Configure, Context, Errors, Utils, Logs
+from waflib import Configure, Context, Errors, Options, Utils, Logs
 from waflib.Configure import conf
 from waflib.extras import msvs
 import glob, os
 
-ctx.load('variant-builder', tooldir='tools')
-ctx.load('toolchains', tooldir='tools')
+local_tools = [
+    "variant-builder",
+    "toolchains",
+    "debug-info",
+]
+
+ctx.load(local_tools, tooldir='tools')
+
+ctx.env.PREFIX = "./usr"
 
 # Track all tools files for Waf's autoconfig Node hashing
 if os.path.exists('tools'):

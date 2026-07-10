@@ -14,6 +14,7 @@ A modern Waf-based C++ build system featuring multi-project and multi-mode build
 - **PDB Support**: Support for generating MSVC-compatible `.pdb` debug symbol files alongside the Windows target `.exe` during cross-compilation via LLVM's `lld` linker.
 - **Fully Static Linking**: Production-ready static linking flags (standard C++, GCC, and thread runtimes) for standalone Windows executables with no external DLL dependencies.
 - **Automatic Configuration Tracking**: Native Waf `autoconfig` extended to track changes to both wscripts and Python files under the `tools/` folder. Modifying any configuration script automatically triggers a configuration update on the next build.
+- **Debug Symbol Stripping**: Automatically extract debug symbols from ELF/PE binaries (via `objcopy` and `strip`) into separate `.debug` files, keep unstripped copies for debugging, and coordinate installation ordering.
 
 ---
 
@@ -60,6 +61,9 @@ Compile your project targets by passing the project, platform, mode, and archite
 - `--mode=MODE`: Build mode (`debug` or `release`). Default is `debug`.
 - `--platform=PLATFORM`: Target platform (`Windows` or `Linux`).
 - `--arch=ARCH`: Target architecture (`x64`, `x86` for Windows; `x86_64` for Linux).
+- `--strip-debug`: Strip debug info into a separate `.debug` file (default: `True`).
+- `--install-debug-info`: Install the stripped debug info file when performing installation (default: `True`).
+- `--keep-unstripped-binary`: Keep a backup of the original unstripped binary as `<name>.unstripped` (default: `False`).
 
 ---
 

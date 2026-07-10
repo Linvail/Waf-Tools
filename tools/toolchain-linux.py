@@ -1,5 +1,5 @@
 from waflib.Configure import conf
-from waflib import Context, Logs
+from waflib import Logs
 import glob, os
 
 
@@ -12,6 +12,7 @@ def configure_Linux_x64_gcc(ctx):
     ctx.setenv(env_name, ctx.env)
 
     ctx.load('gcc gxx')
+    ctx.load('gccdeps', tooldir='submodules/external/waf/waflib/extras')
 
     ctx.env.append_unique('CXXFLAGS', ['-std=c++17'])
 
@@ -50,6 +51,7 @@ def configure_Linux_x64_clang(ctx):
     ctx.setenv(env_name, ctx.env)
 
     ctx.load('clang clangxx')
+    ctx.load('gccdeps', tooldir='submodules/external/waf/waflib/extras')
 
     ctx.env.append_unique('CXXFLAGS', ['-std=c++17'])
 
@@ -88,6 +90,7 @@ def configure_Windows_x64_Linux_clang(ctx):
     ctx.setenv(env_name, ctx.env)
 
     ctx.load('clang clangxx')
+    ctx.load('gccdeps', tooldir='submodules/external/waf/waflib/extras')
 
     # Tell Clang executable wrapper to compile/link for Windows target
     target_flags = ['-target', 'x86_64-pc-windows-gnu']

@@ -1,4 +1,5 @@
 out
+install
 tools/__pycache__
 .vscode
 .lock-*

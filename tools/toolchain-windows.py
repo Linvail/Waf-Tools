@@ -1,5 +1,5 @@
 from waflib.Configure import conf
-from waflib import Context, Logs
+from waflib import Logs
 
 @conf
 def configure_win_msvc_common(ctx, env_name):

@@ -1,5 +1,6 @@
 
-import platform
+from waflib import Options, Logs
+import platform, os
 
 def setup_build_env(bld):
     target_platform = bld.target_platform
@@ -10,6 +11,9 @@ def setup_build_env(bld):
         compiler = "msvc"
     elif host_platform == "Linux" and target_platform == "Windows":
         # Cross-compiling from Linux to Windows, so we use clang.
+        compiler = "clang"
+    elif host_platform == "Linux":
+        # TODO: Allow user to choose gcc.
         compiler = "clang"
     else:
         bld.fatal("Unsupported host platform: %s" % host_platform)
@@ -26,11 +30,11 @@ def setup_build_env(bld):
 
 def build_example1(bld):
     setup_build_env(bld)
-    bld(features='cxx cxxprogram', source='src/Example1.cpp', target='Example1')
+    bld(features='cxx cxxprogram debug-info', source='src/Example1.cpp', target='Example1')
 
 def build_example2(bld):
     setup_build_env(bld)
-    bld(features='cxx cxxprogram', source='src/Example2.cpp', target='Example2')
+    bld(features='cxx cxxprogram debug-info', source='src/Example2.cpp', target='Example2')
 
 
 
@@ -40,3 +44,10 @@ product_table = {
 }
 
 product_table[bld.project](bld)
+
+if not Options.options.destdir:
+    Options.options.destdir = os.path.join("install", bld.variant)
+    Logs.info("destdir is not specified, use default: %s" % Options.options.destdir)
+if not os.path.isabs(Options.options.destdir):
+    Options.options.destdir = os.path.join(bld.top_dir, Options.options.destdir)
+    Logs.info("Installation directory: %s" % Options.options.destdir)
