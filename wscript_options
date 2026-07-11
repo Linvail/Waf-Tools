@@ -7,3 +7,4 @@ local_tools = [
 ]
 
 opt.load(local_tools, tooldir='tools')
+opt.load('clang_compilation_database', tooldir='submodules/external/waf/waflib/extras')

@@ -3,3 +3,4 @@ install
 tools/__pycache__
 .vscode
 .lock-*
+compile_commands.json
